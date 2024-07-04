@@ -1,14 +1,14 @@
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import React from "react";
-import { Tabs } from "expo-router";
 import { Icon } from "@/assets/IconMap";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Journal from "./journal";
-import Home from "./home";
-import Stats from "./stats";
+import { createStackNavigator } from "@react-navigation/stack";
+
+import Exercises from "@/app/screens/Exercises";
+import Journal from "@/app/screens/Journal";
+import Stats from "@/app/screens/Stats";
+import Home from "@/app/screens/Home";
 import Profile from "./profile";
-import CreateButton from "@/components/CreateButton";
-import { JournalStackNavigator } from "./journal/navigator";
 
 interface TabIconProps {
   icon: string;
@@ -17,6 +17,7 @@ interface TabIconProps {
 }
 
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
 const TabIcon = ({ icon, name, focused }: TabIconProps) => {
   return (
@@ -74,7 +75,6 @@ const TabsLayout = () => {
 
         <Tab.Screen
           name="Journal"
-          component={JournalStackNavigator}
           options={{
             tabBarShowLabel: false,
             header: () => <></>,
@@ -82,7 +82,22 @@ const TabsLayout = () => {
               <TabIcon icon={"notebook"} name="Journal" focused={focused} />
             ),
           }}
-        />
+        >
+          {() => (
+            <Stack.Navigator>
+              <Stack.Screen
+                name="JournalScreen"
+                component={Journal}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="Exercises"
+                component={Exercises}
+                options={{ headerShown: false }}
+              />
+            </Stack.Navigator>
+          )}
+        </Tab.Screen>
 
         <Tab.Screen
           name="Stats"

@@ -55,6 +55,7 @@ interface RoundedInputProps {
   containerClasses?: string;
   inputClasses?: string;
   type?: string;
+  onPress?: () => void;
 }
 
 export const RoundedInput = ({
@@ -97,6 +98,44 @@ export const RoundedInput = ({
             <Icon name={!showPassword ? "eye" : "eye-closed"} size={24} />
           </TouchableOpacity>
         )}
+      </View>
+    </View>
+  );
+};
+
+export const RoundedSearchBar = ({
+  name,
+  value,
+  handleChange,
+  placeholder,
+  containerClasses,
+  inputClasses,
+  onPress,
+}: RoundedInputProps) => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  return (
+    <View className={cn(`flex-col gap-2`, containerClasses)}>
+      {name && <Text className="text-base text-slate-600 pl-6">{name}</Text>}
+
+      <View
+        className={cn(
+          "flex-row w-full h-16 pl-6 rounded-full border border-border focus:border-secondary items-center",
+          inputClasses
+        )}
+      >
+        <TextInput
+          numberOfLines={1}
+          autoCorrect={false}
+          value={value}
+          onChangeText={handleChange}
+          placeholder={placeholder}
+          placeholderTextColor="rgb(161 161 170)"
+          className="flex-1 w-full text-base  h-full"
+        />
+        <TouchableOpacity onPress={onPress} className="pr-6">
+          <Icon name={"search"} size={20} />
+        </TouchableOpacity>
       </View>
     </View>
   );

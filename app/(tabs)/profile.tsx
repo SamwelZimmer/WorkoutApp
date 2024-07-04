@@ -1,10 +1,10 @@
 import { Text, View } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { router } from "expo-router";
 import { RoundedButton } from "@/components/Buttons";
 import { supabase } from "@/lib/supabase";
 import { useGlobalContext } from "@/context/GlobalProvider";
+import PageHeader from "@/components/PageHeader";
 
 const Profile = () => {
   const { setUser, setSession } = useGlobalContext();
@@ -24,8 +24,8 @@ const Profile = () => {
 
   return (
     <SafeAreaView>
-      <View className="h-full items-center justify-center">
-        <Text>Profile Yo</Text>
+      <PageHeader text="Profile" />
+      <View className="h-full items-center justify-center px-6">
         <RoundedButton text="Logout" onPress={handleLogOut} />
       </View>
     </SafeAreaView>

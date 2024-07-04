@@ -1,3 +1,49 @@
+import { Exercise } from "@/lib/types";
+
+export const CHIP_COLORS = {
+  yellow: {
+    container:
+      "border bg-yellow-50 border-yellow-100 shadow shadow-yellow-100/50",
+    rgb: "rgb(234, 179, 8)",
+  },
+  orange: {
+    container:
+      "border bg-orange-50 border-orange-100 shadow shadow-orange-100/50 text-violet-500",
+    rgb: "rgb(249, 115, 22)",
+  },
+  blue: {
+    container:
+      "border bg-blue-50 border-blue-100 shadow shadow-blue-100/50 text-violet-500",
+    rgb: "rgb(59, 130, 246)",
+  },
+  teal: {
+    container:
+      "border bg-teal-50 border-teal-100 shadow shadow-teal-100/50 text-violet-500",
+    rgb: "rgb(20, 184, 166)",
+  },
+  violet: {
+    container:
+      "border bg-violet-50 shadow shadow-violet-100/50 border-violet-100 text-violet-500",
+    rgb: "rgb(139, 92, 246)",
+  },
+  red: "border bg-red-50 shadow shadow-red-100/50 border-red-100 text-red-500",
+  green: {
+    container:
+      "border bg-green-50 shadow shadow-green-100/50 border-green-100 text-green-500",
+    rgb: "rgb(34, 197, 94)",
+  },
+};
+
+export const EXERCISE_TYPE_MAP = {
+  sets: { icon: "dumbbell", name: "Sets", color: CHIP_COLORS["orange"] },
+  interval: {
+    icon: "stop-watch",
+    name: "Interval",
+    color: CHIP_COLORS["blue"],
+  },
+  duration: { icon: "clock", name: "Duration", color: CHIP_COLORS["green"] },
+};
+
 export const ACTIVITIES = [
   { name: "Running", type: "cardio" },
   { name: "Walking", type: "cardio" },

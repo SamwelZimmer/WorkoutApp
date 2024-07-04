@@ -11,3 +11,11 @@ export type Activity = {
   name: string;
   type: string;
 };
+
+export type Exercise = {
+  name: string;
+  type: ExerciseType;
+  variations?: [];
+};
+
+export type ExerciseType = "sets" | "interval" | "duration";
