@@ -7,8 +7,10 @@ import { Apple } from "@/assets/icons/apple";
 import { ArrowLeft } from "@/assets/icons/arrow-left";
 import { ChevronLeft } from "@/assets/icons/chevron-left";
 import { Clock } from "@/assets/icons/clock";
+import { Close } from "@/assets/icons/close";
 import { Dumbbell } from "@/assets/icons/dumbbell";
 import { Eye } from "@/assets/icons/eye";
+import { Gift } from "@/assets/icons/gift";
 import { EyeClosed } from "@/assets/icons/eye-closed";
 import { Google } from "@/assets/icons/google";
 import { GraphUp } from "@/assets/icons/graph-up";
@@ -27,6 +29,8 @@ interface IconProps {
 }
 
 export const IconMap: IconMapType = {
+  gift: Gift,
+  close: Close,
   pencil: Pencil,
   search: Search,
   toggles: Toggles,

@@ -7,13 +7,18 @@ import { ExerciseType } from "@/lib/types";
 const ExerciseTypeChip = ({ type }: { type: ExerciseType }) => {
   return (
     <View
-      className={`h-8 px-4 flex-row rounded-full items-center justify-center gap-2 ${EXERCISE_TYPE_MAP[type].color.container}`}
+      style={{
+        borderColor: EXERCISE_TYPE_MAP[type].color.border,
+        shadowColor: EXERCISE_TYPE_MAP[type].color.shadow,
+        backgroundColor: EXERCISE_TYPE_MAP[type].color.bg,
+      }}
+      className={`h-8 px-4 flex-row rounded-full items-center justify-center gap-2 border shadow==`}
     >
       <Icon
-        color={EXERCISE_TYPE_MAP[type].color.rgb}
+        color={EXERCISE_TYPE_MAP[type].color.text}
         name={EXERCISE_TYPE_MAP[type].icon}
       />
-      <Text style={{ color: EXERCISE_TYPE_MAP[type].color.rgb }}>
+      <Text style={{ color: EXERCISE_TYPE_MAP[type].color.text }}>
         {EXERCISE_TYPE_MAP[type].name}
       </Text>
     </View>

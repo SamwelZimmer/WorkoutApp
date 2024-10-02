@@ -23,6 +23,8 @@ import { RoundedInput } from "@/components/Inputs";
 import { supabase } from "@/lib/supabase";
 import { useGlobalContext } from "@/context/GlobalProvider";
 
+// TODO: user has to sign up / in with an internet connection, but once signed should be added to async stoage
+
 // Tells Supabase Auth to continuously refresh the session automatically if
 // the app is in the foreground. When this is added, you will continue to receive
 // `onAuthStateChange` events with the `TOKEN_REFRESHED` or `SIGNED_OUT` event

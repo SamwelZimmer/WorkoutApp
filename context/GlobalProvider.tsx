@@ -1,10 +1,16 @@
 import { getProfile } from "@/lib/queries";
 import { supabase } from "@/lib/supabase";
-import { UserData } from "@/lib/types";
+import { Exercise, UserData } from "@/lib/types";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { Session } from "@supabase/supabase-js";
-import { router } from "expo-router";
 import React, { createContext, useState, useEffect, useContext } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import openDatabaseAsync, {
+  addExerciseAsync,
+  createTableAsync,
+  getExercisesAsync,
+} from "@/lib/db";
+import { SQLiteDatabase } from "expo-sqlite";
 
 // define the shape of the context value
 interface GlobalContextType {
@@ -12,6 +18,7 @@ interface GlobalContextType {
   setSession: React.Dispatch<React.SetStateAction<Session | null>>;
   user: UserData | null;
   setUser: React.Dispatch<React.SetStateAction<UserData | null>>;
+  db: null | SQLiteDatabase;
 }
 
 // initial states for the context
@@ -20,6 +27,7 @@ const initialGlobalState: GlobalContextType = {
   setSession: () => {},
   user: null,
   setUser: () => {},
+  db: null,
 };
 
 // create the context with a default value of undefined
@@ -43,6 +51,34 @@ interface GlobalProviderProps {
 const GlobalProvider = ({ children }: GlobalProviderProps) => {
   const [session, setSession] = useState<Session | null>(null);
   const [user, setUser] = useState<UserData | null>(null);
+  const [db, setDb] = useState<SQLiteDatabase | null>(null);
+
+  useEffect(() => {
+    const initializeDatabase = async () => {
+      try {
+        const database = await openDatabaseAsync("db.db");
+        setDb(database);
+        await createTableAsync(database);
+      } catch (error) {
+        console.error("Error initializing database:", error);
+      }
+    };
+
+    initializeDatabase();
+  }, []);
+
+  // useEffect(() => {
+  //   const fetchItems = async () => {
+  //     const placeholderExersize: Exercise = { name: "New Poop", type: "misc" };
+  //     if (db) {
+  //       // await addExerciseAsync(db, placeholderExersize);
+  //       const data = await getExercisesAsync(db);
+  //       console.log(data);
+  //     }
+  //   };
+
+  //   fetchItems();
+  // }, [db]);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -77,11 +113,14 @@ const GlobalProvider = ({ children }: GlobalProviderProps) => {
     setSession,
     user,
     setUser,
+    db,
   };
 
   return (
     <GlobalContext.Provider value={valueObj}>
-      <GestureHandlerRootView>{children}</GestureHandlerRootView>
+      <GestureHandlerRootView>
+        <BottomSheetModalProvider>{children}</BottomSheetModalProvider>
+      </GestureHandlerRootView>
     </GlobalContext.Provider>
   );
 };

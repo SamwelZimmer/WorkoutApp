@@ -1,40 +1,75 @@
-import { Exercise } from "@/lib/types";
+import { Exercise, ExerciseType } from "@/lib/types";
+
+export const DOMAIN =
+  process.env.EXPO_PUBLIC_ENV === "DEVELOPMENT"
+    ? process.env.EXPO_PUBLIC_DEV_API_URL
+    : process.env.EXPO_PUBLIC_PROD_API_URL;
+
+export const MODELS = {
+  gpt: { name: "GPT 4", label: "gpt" },
+  gptTurbo: { name: "GPT Turbo", label: "gptTurbo" },
+  claude: { name: "Claude", label: "claude" },
+  claudeInstant: {
+    name: "Claude Instant",
+    label: "claudeInstant",
+  },
+  cohere: { name: "Cohere", label: "cohere" },
+  cohereWeb: { name: "Cohere Web", label: "cohereWeb" },
+  mistral: { name: "Mistral", label: "mistral" },
+  gemini: { name: "Gemini", label: "gemini" },
+};
 
 export const CHIP_COLORS = {
   yellow: {
-    container:
-      "border bg-yellow-50 border-yellow-100 shadow shadow-yellow-100/50",
-    rgb: "rgb(234, 179, 8)",
+    container: "bg-yellow-50 border-yellow-100 shadow-yellow-100/50",
+    text: "rgb(234, 179, 8)",
+    bg: "rgb(254, 252, 232)",
+    border: "rgb(254, 249, 195)",
+    shadow: "rgb(254, 249, 195 / 0.5)",
   },
   orange: {
-    container:
-      "border bg-orange-50 border-orange-100 shadow shadow-orange-100/50 text-violet-500",
-    rgb: "rgb(249, 115, 22)",
+    text: "rgb(249, 115, 22)",
+    bg: "rgb(255, 247, 237)",
+    border: "rgb(255, 237, 213)",
+    shadow: "rgb(255, 237, 213 / 0.5)",
   },
   blue: {
-    container:
-      "border bg-blue-50 border-blue-100 shadow shadow-blue-100/50 text-violet-500",
-    rgb: "rgb(59, 130, 246)",
+    container: "border-blue-100 shadow-blue-100/50 text-violet-500",
+    text: "rgb(59, 130, 246)",
+    bg: "rgb(239, 246, 255)",
+    border: "rgb(219, 234, 254)",
+    shadow: "rgb(219, 234, 254 / 0.5)",
   },
   teal: {
-    container:
-      "border bg-teal-50 border-teal-100 shadow shadow-teal-100/50 text-violet-500",
-    rgb: "rgb(20, 184, 166)",
+    container: "bg-teal-50 border-teal-100 shadow-teal-100/50 text-violet-500",
+    text: "rgb(20, 184, 166)",
+    bg: "rgb(240, 253, 250)",
+    border: "rgb(204, 251, 241)",
+    shadow: "rgb(204, 251, 241 / 0.5)",
   },
   violet: {
-    container:
-      "border bg-violet-50 shadow shadow-violet-100/50 border-violet-100 text-violet-500",
-    rgb: "rgb(139, 92, 246)",
+    text: "rgb(139, 92, 246)",
+    bg: "rgb(245, 243, 255)",
+    border: "rgb(237, 233, 254)",
+    shadow: "rgb(237, 233, 254 / 0.5)",
   },
-  red: "border bg-red-50 shadow shadow-red-100/50 border-red-100 text-red-500",
+  red: {
+    text: "rgb(239, 68, 68)",
+    bg: "rgb(254, 242, 242)",
+    border: "rgb(254, 226, 226)",
+    shadow: "rgb(254, 226, 226 / 0.5)",
+  },
   green: {
     container:
-      "border bg-green-50 shadow shadow-green-100/50 border-green-100 text-green-500",
-    rgb: "rgb(34, 197, 94)",
+      "bg-green-50 shadow-green-100/50 border-green-100 text-green-500",
+    text: "rgb(34, 197, 94)",
+    bg: "rgb(240, 253, 244)",
+    border: "rgb(220, 252, 231)",
+    shadow: "rgb(220, 252, 231 / 0.5)",
   },
 };
 
-export const EXERCISE_TYPE_MAP = {
+export const EXERCISE_TYPE_MAP: Record<ExerciseType, any> = {
   sets: { icon: "dumbbell", name: "Sets", color: CHIP_COLORS["orange"] },
   interval: {
     icon: "stop-watch",
@@ -42,6 +77,7 @@ export const EXERCISE_TYPE_MAP = {
     color: CHIP_COLORS["blue"],
   },
   duration: { icon: "clock", name: "Duration", color: CHIP_COLORS["green"] },
+  misc: { icon: "gift", name: "Misc", color: CHIP_COLORS["yellow"] },
 };
 
 export const ACTIVITIES = [
